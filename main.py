@@ -1,5 +1,5 @@
 from math import radians 
-from turtle import speed, penup, pendown, setpos, seth, forward, exitonclick, circle
+from turtle import screensize, speed, penup, pendown, setpos, seth, forward, exitonclick, circle
 
 poledniky_list = []
 rovnobezky_list = []
@@ -14,9 +14,9 @@ def poledniky(R, meritko, zobrazeni_input):
         if zobrazeni_input == "Ma" or zobrazeni_input == "Po": # ! Marinovo
             poledniky_x = round(R * (radians(poledniky_deg)) * 1000000 / meritko, 1)
         elif zobrazeni_input == "La": # ! Lambertovo: kuželové
-            poledniky_x = round()
+            pass
         elif zobrazeni_input == "Sa": # ! Sansonovo: nepravé 
-            poledniky_x = round()
+            pass
         else:
             exit()
 
@@ -50,6 +50,7 @@ def grafika(rovnobezky_list, poledniky_list, zobrazeni_input):
     delka_polednik = abs(max(rovnobezky_list) - min(rovnobezky_list))
     delka_rovnobezka = abs(max(poledniky_list) - min(poledniky_list))
     speed(200)
+    screensize(1260, 891)
 
     if zobrazeni_input == "Ma":
         for i in range(37):
@@ -80,7 +81,6 @@ def grafika(rovnobezky_list, poledniky_list, zobrazeni_input):
             pendown()
             circle(poledniky_list[x]) 
         exitonclick()
-
     else:
         pass
 
