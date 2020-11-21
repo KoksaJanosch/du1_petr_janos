@@ -12,7 +12,7 @@ def poledniky(R, meritko, zobrazeni_input):
     # poledníky v rozsahu -180 až po 180, po 10
     for poledniky_deg in range(-180, 190, 10):
         if zobrazeni_input == "Ma" or zobrazeni_input == "Po": # ! Marinovo
-            poledniky_x = round(R * (radians(poledniky_deg)) * 1000000 / meritko, 1)
+            poledniky_x = round(R * (radians(poledniky_deg)) * 100000 / meritko /0.03 , 1)
         elif zobrazeni_input == "La": # ! Lambertovo: kuželové
             pass
         elif zobrazeni_input == "Sa": # ! Sansonovo: nepravé 
@@ -33,7 +33,7 @@ def rovnobezky(R, meritko, zobrazeni_input):
     # rovnoběžky v rozsahu -90 až 90
     for rovnobezky_deg in range(-90, 100, 10):
         if zobrazeni_input == "Ma" or zobrazeni_input == "Po": # ! Marinovo / Postelovo
-            rovnobezky_y = round(R * (radians(rovnobezky_deg)) * 1000000 / meritko, 1)
+            rovnobezky_y = round(R * (radians(rovnobezky_deg)) * 100000 / meritko / 0.03, 1)
         else:
             quit()
 
@@ -100,7 +100,7 @@ while True:
     else:
         print("Nesprávný vstup, zadejte zobrazení z nabídky:")
 
-# Poloměra
+# Poloměr
 while True:
     R = float(input("\nZadejte poloměr Zěmě (zadejte nulu pro výchozí poloměr 6371.11): \n"))
     if R < 0:
@@ -114,17 +114,17 @@ while True:
 
 # Měřítko
 while True:
-        meritko = int(input("\nZadejte měřítko (pro výchozí 1 : 100000000 zadejte nulu): \n"
-        "1 : "))
-        if meritko < 0:
-            print("zadané měřítko je chybné, zkuste to znovu \n")
-            continue
-        elif meritko == 0:
-            meritko = 100000000
-            break
-        else:
-            break
-        
+    meritko = int(input("\nZadejte měřítko (pro výchozí 1 : 100000000 zadejte nulu): \n"
+    "1 : "))
+    if meritko < 0:
+        print("zadané měřítko je chybné, zkuste to znovu \n")
+        continue
+    elif meritko == 0:
+        meritko = 100000000
+        break
+    else:
+        break
+    
 
 # TODO: Volání funkcí
 poledniky(R, meritko, zobrazeni_input)
