@@ -1,5 +1,2 @@
-
-for dopocet in range(0, 370, 10):
-    x = dopocet
-    print(x)
-
+import turtle
+turtle.circle(100, 180)
