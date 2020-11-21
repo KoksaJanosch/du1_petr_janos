@@ -2,24 +2,25 @@ from math import radians
 from turtle import screensize, speed, penup, pendown, setpos, seth, forward, exitonclick, circle
 
 # konstatna MM - přepočet na milimetry
-MM = 1000000
+
 
 
 # TODO: Funkce pro jednotlivá zobrazení
 def Marinovo(R, meritko):
     """ Vytvoří seznam souřadnic k Marinovu zobrazení """
+    MM = 10000000 # km » mm: 1.000.000 + převod měřítka: *10
     list_poledniky = []
     list_rovnobezky = []
 
 
     # poledniky
     for deg_x in range(-180, 190, 10):
-        poledniky_x = round(R * (radians(deg_x)) * 100000 / meritko / 0.03, 1)
+        poledniky_x = round(R * (radians(deg_x)) * MM / meritko / 3, 1)
         list_poledniky.append(poledniky_x)
     
     # rovnobezky
     for deg_y in range(-90, 100, 10):
-        rovnobezky_y = round(R * (radians(deg_y)) * 100000 / meritko / 0.03, 1)
+        rovnobezky_y = round(R * (radians(deg_y)) * MM / meritko / 3, 1)
         list_rovnobezky.append(rovnobezky_y)
 
     # * KRESLENÍ
@@ -42,19 +43,43 @@ def Marinovo(R, meritko):
         penup()
     exitonclick()
 
-    return(list_poledniky, list_rovnobezky)
-
 
 def Postelovo(R, meritko):
     """ Vykreslí Postelovo zobrazení """
-    
+    MM = 10000000  # km » mm: 1.000.000 + převod měřítka: *10
+    list_poledniky = []
     list_rovnobezky = []
+
+
+    for deg_x in range(-180, 190, 10):
+        poledniky_x = round(R * (radians(deg_x)) * MM / meritko / 3, 1)
+        list_poledniky.append(poledniky_x)
 
     for deg_y in range(-90, 100, 10):
         rovnobezky_y = round(R * (radians(deg_y)) * MM / meritko / 3, 1)
         list_rovnobezky.append(rovnobezky_y)
 
-    return(list_rovnobezky)
+    # * KRESLENÍ
+    delka_polednik = abs(max(list_rovnobezky) - min(list_rovnobezky))
+    print("delka poledniku", delka_polednik)
+    speed(10)
+    screensize(1260, 891)
+    for deg in range(0, 370, 10):
+                seth(deg)
+                forward(delka_polednik)
+                penup()
+                seth(deg-180)
+                forward(delka_polednik)
+                pendown()
+    for x in range(19):
+        penup()
+        setpos(0,list_poledniky[x])
+        pendown()
+        circle(list_poledniky[x]) 
+    exitonclick()
+
+
+
 
 # TODO: Uživatelské vstupy
 # Zobrazení
