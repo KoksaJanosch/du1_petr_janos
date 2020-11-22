@@ -15,11 +15,11 @@ Program umožňuje si zvolit vlasntí poloměr Země, který uživatel zadá (v 
 Uživatel zadá měřítko, které chce použít pro výpočet zobrazení. Pro měřítko např. 1 : 50 000 0000 zadejde `50000000`. Opět je možnost použít defaultní měřítko zadáním nuly, tj. 1 : 120 000 000.
 
 ### Souřadnice bodů
-Program se ptá uživatele opakovaně na body, které chce zobrazit. Nejdříve se zadá zeměpišná šířka, poté výška. Použít se mohou jak celá, tak desetinná čísla. Vždy po zadání vstupů program vypíše přepočtené souřadnice daného bodu a ptá se dál na další body. Smyčka se přeruší zadání souřadnice `(0,0)`.
+Program se ptá uživatele opakovaně na body, které chce zobrazit. Nejdříve se zadá zeměpišná šířka, poté výška. Použít se mohou jak celá, tak desetinná čísla. Vždy po zadání vstupů program vypíše přepočtené souřadnice daného bodu a ptá se dál na další body. Smyčka se přeruší zadáním souřadnice `(0,0)`.
 
 
 ## Výstup programu
-Program vykreslí zobrazení, které spočítá s uživatelskými vstupy. Využívána je knihovna turtle. 
+Program vykreslí zobrazení vypočítané z uživatelských vstupů. Využívána je knihovna turtle. 
 
 
 - *používaná verze pythonu: 3.8.5* 
