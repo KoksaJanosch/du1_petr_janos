@@ -94,22 +94,23 @@ def Ptolemaiovo(R, meritko, M):
     """ Vykreslí Ptolemainovo zobrazení. Vstupem měřítko, poloměr a konstanta M. """
 
     speed(10)
+    screensize(1260, 891)  # velikost plátna
     for j in range(-90, 100, 10):
         penup()
-        setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-j))) * cos((radians(-180)*sin(radians(30)))),
-               ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-j))) * sin((radians(-180)*sin(radians(30)))))
+        setpos(radians(30) - ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-j))) * cos((radians(-180)*sin(radians(30)))),
+               ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-j))) * sin((radians(-180)*sin(radians(30)))))
         pendown()
         for i in range(-180, 190, 10):
-            setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30))) + (R*M/meritko)*(radians(30-j))) * cos((radians(i)*sin(radians(30)))),
-                   ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-j))) * sin((radians(i)*sin(radians(30)))))
+            setpos(radians(30) - ((R*M/meritko/3)*(1/tan(radians(30))) + (R*M/meritko/3)*(radians(30-j))) * cos((radians(i)*sin(radians(30)))),
+                   ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-j))) * sin((radians(i)*sin(radians(30)))))
     for j in range(-180, 190, 10):
-        penup()  # !
-        setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30))) + (R*M/meritko)*(radians(30-(-90)))) * cos((radians(j)*sin(radians(30)))),
-               ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-(-90)))) * sin((radians(j)*sin(radians(30)))))
+        penup() 
+        setpos(radians(30) - ((R*M/meritko/3)*(1/tan(radians(30))) + (R*M/meritko/3)*(radians(30-(-90)))) * cos((radians(j)*sin(radians(30)))),
+               ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-(-90)))) * sin((radians(j)*sin(radians(30)))))
         pendown()
         for i in range(-90, 100, 10):
-            setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30))) + (R*M/meritko)*(radians(30-i))) * cos((radians(j)*sin(radians(30)))),
-                   ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-i))) * sin(radians(j)*sin(radians(30))))
+            setpos(radians(30) - ((R*M/meritko/3)*(1/tan(radians(30))) + (R*M/meritko/3)*(radians(30-i))) * cos((radians(j)*sin(radians(30)))),
+                   ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-i))) * sin(radians(j)*sin(radians(30))))
 
     exitonclick()
 
@@ -120,9 +121,8 @@ while True:
                                 ' Ma = Marinovo zobrazení (válcové)\n'  
                                 ' Po = Postelovo zobrazení (azimutální)\n'  
                                 ' Pt = Ptoilemanovo zobrazení \n' 
-                                ' Sa = Sansonovo zobrazení \n'  
                                 '\nZadejte zkratku: '))
-    if zobrazeni_input == "Ma" or zobrazeni_input == "Po" or zobrazeni_input == "Pt" or zobrazeni_input == "Sa":
+    if zobrazeni_input == "Ma" or zobrazeni_input == "Po" or zobrazeni_input == "Pt":
         break
     else:
         print("!!! Nesprávný vstup, zadejte zobrazení z nabídky !!! \n")
