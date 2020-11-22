@@ -1,12 +1,15 @@
 from math import radians
 from turtle import screensize, speed, penup, pendown, setpos, seth, forward, exitonclick, circle, dot
 
-# konstatna MM - přepočet na milimetry
+# konstatna M - přepočet na milimetry
+M = 10000000
 
 # TODO: Funkce pro jednotlivá zobrazení
+
+
 def Marinovo(R, meritko):
     """ Vytvoří seznam souřadnic k Marinovu zobrazení """
-    M = 10000000 # km » mm: 1.000.000 + převod měřítka: *10
+    M = 10000000  # km » mm: 1.000.000 + převod měřítka: *10
     list_poledniky = []
     list_rovnobezky = []
 
@@ -38,27 +41,26 @@ def Marinovo(R, meritko):
         forward(delka_rovnobezka)
         penup()
 
-def Marinovo_body(R, meritko, body_X, body_Y):
+
+def Marinovo_body(body_X, body_Y):
     M = 10000000  # km » mm: 1.000.000 + převod měřítka: *10
 
-    # poledníky
-    for a in range(len(body_X)):
-        x = round(R * (radians(body_X[a])) * M / meritko / 3, 2)
-        y = round(R * (radians(body_Y[a])) * M / meritko / 3, 2)
-        print("Přepočtené souřadnice zadaného bodu: \n"
-                "[",x,";",y,"]")
+    print("Zadejte zeměpisnou šířku a výšku bodu, který chcete zaznamenat: \n"
+          "(pro ukončení zadávání bodů napište souřadnice (0,0)")
+
+    for p in range(len(body_X)):
         penup()
-        setpos(x,y)
+        setpos(body_X[p], body_Y[p])
         pendown()
         dot(10)
     exitonclick()
+
 
 def Postelovo(R, meritko):
     """ Vykreslí Postelovo zobrazení """
     M = 10000000  # km » mm: 1.000.000 + převod měřítka: *10
     list_poledniky = []
     list_rovnobezky = []
-
 
     for deg_x in range(-180, 190, 10):
         poledniky_x = round(R * (radians(deg_x)) * M / meritko / 3, 1)
@@ -74,17 +76,18 @@ def Postelovo(R, meritko):
     speed(10)
     screensize(1260, 891)
     for deg in range(0, 370, 10):
-                seth(deg)
-                forward(delka_polednik)
-                penup()
-                seth(deg-180)
-                forward(delka_polednik)
-                pendown()
+        seth(deg)
+        forward(delka_polednik)
+        penup()
+        seth(deg-180)
+        forward(delka_polednik)
+        pendown()
     for x in range(19):
         penup()
-        setpos(0,list_poledniky[x])
+        setpos(0, list_poledniky[x])
         pendown()
-        circle(list_poledniky[x]) 
+        circle(list_poledniky[x])
+
 
 def Postelovo_body(R, meritko, body_X, body_Y):
     M = 10000000  # km » mm: 1.000.000 + převod měřítka: *10
@@ -94,12 +97,13 @@ def Postelovo_body(R, meritko, body_X, body_Y):
         x = round(R * (radians(body_X[a])) * M / meritko / 3, 2)
         y = round(R * (radians(body_Y[a])) * M / meritko / 3, 2)
         print("Přepočtené souřadnice zadaného bodu: \n"
-                "[",x,";",y,"]")
+              "[", x, ";", y, "]")
         penup()
-        setpos(x,y)
+        setpos(x, y)
         pendown()
         dot(10)
     exitonclick()
+
 
 # TODO: Uživatelské vstupy
 # Zobrazení
@@ -141,27 +145,29 @@ while True:
     else:
         break
 
-print("Zadejte zeměpisnou šířku a výšku bodu, který chcete zaznamenat: \n"
-        "(pro ukončení zadávání bodů napište souřadnice (0,0)")
+# ! body
 body_X = []
 body_Y = []
+
 while True:
     x = float(input("z. šířka bodu: "))
     y = float(input("z. výška bodu: "))
-    if x >0 or y > 0:
-        body_X.append(x)
-        body_Y.append(y)
-    
+    if x > 0 or y > 0:
+        souradnice_x = round(R * (radians(x)) * M / meritko / 3, 2)
+        souradnice_y = round(R * (radians(y)) * M / meritko / 3, 2)
+        print("Přepočtené souřadnice zadaného bodu: \n"
+              "[", souradnice_x, ";", souradnice_y, "]")
+        body_X.append(souradnice_x)
+        body_Y.append(souradnice_y)
+
     elif x == 0 and y == 0:
         break
-
 
 # ! volaní funkcí def
 if zobrazeni_input == "Ma":
     print(Marinovo(R, meritko))
-    print(Marinovo_body(R, meritko, body_X, body_Y))
+    print(Marinovo_body(body_X, body_Y))
 
 elif zobrazeni_input == "Po":
     print(Postelovo(R, meritko))
     print(Postelovo_body(R, meritko, body_X, body_Y))
-
