@@ -3,7 +3,7 @@ Program slouží k vykreslení zvoleného zobrazení želví grafikou. Uživatel
 
 ## Uživatelské vstupy
 ### Výběr zobrazení
-Pro volení jednoho z nabízených zobrazení zadejte jeho zkratku.
+Pro zvolení jednoho z nabízených zobrazení zadejte jeho zkratku.
 - Marinovo zobrazení (válcové): `Ma`
 - Postelovo zobrazení (azimutální): `Po`
 - Ptolemainovo zobrazení (kuželové): `Pt`
