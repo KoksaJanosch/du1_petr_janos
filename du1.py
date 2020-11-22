@@ -1,4 +1,4 @@
-from math import radians
+from math import cos, radians, tan, sin
 from turtle import screensize, speed, penup, pendown, setpos, seth, forward, exitonclick, circle, dot
 
 # konstatna M - přepočet na milimetry
@@ -90,16 +90,39 @@ def Postelovo_body(body_X, body_Y):
         dot(10)
     exitonclick()
 
+def Ptolemaiovo(R, meritko, M):
+    """ Vykreslí Ptolemainovo zobrazení. Vstupem měřítko, poloměr a konstanta M. """
+
+    speed(10)
+    for j in range(-90, 100, 10):
+        penup()
+        setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-j))) * cos((radians(-180)*sin(radians(30)))),
+               ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-j))) * sin((radians(-180)*sin(radians(30)))))
+        pendown()
+        for i in range(-180, 190, 10):
+            setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30))) + (R*M/meritko)*(radians(30-j))) * cos((radians(i)*sin(radians(30)))),
+                   ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-j))) * sin((radians(i)*sin(radians(30)))))
+    for j in range(-180, 190, 10):
+        penup()  # !
+        setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30))) + (R*M/meritko)*(radians(30-(-90)))) * cos((radians(j)*sin(radians(30)))),
+               ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-(-90)))) * sin((radians(j)*sin(radians(30)))))
+        pendown()
+        for i in range(-90, 100, 10):
+            setpos(radians(30) - ((R*M/meritko)*(1/tan(radians(30))) + (R*M/meritko)*(radians(30-i))) * cos((radians(j)*sin(radians(30)))),
+                   ((R*M/meritko)*(1/tan(radians(30)))+(R*M/meritko)*(radians(30-i))) * sin(radians(j)*sin(radians(30))))
+
+    exitonclick()
+
 # TODO: Uživatelské vstupy
 # * Výběr zobrazení 
 while True:
     zobrazeni_input = str(input('Nabízená zobrazení: \n'
                                 ' Ma = Marinovo zobrazení (válcové)\n'  
                                 ' Po = Postelovo zobrazení (azimutální)\n'  
-                                ' La = Lambertovo zobrazení \n' 
+                                ' Pt = Ptoilemanovo zobrazení \n' 
                                 ' Sa = Sansonovo zobrazení \n'  
                                 '\nZadejte zkratku: '))
-    if zobrazeni_input == "Ma" or zobrazeni_input == "Po" or zobrazeni_input == "La" or zobrazeni_input == "Sa":
+    if zobrazeni_input == "Ma" or zobrazeni_input == "Po" or zobrazeni_input == "Pt" or zobrazeni_input == "Sa":
         break
     else:
         print("!!! Nesprávný vstup, zadejte zobrazení z nabídky !!! \n")
@@ -165,5 +188,8 @@ if zobrazeni_input == "Ma":
 elif zobrazeni_input == "Po":
     Postelovo(M, R, meritko)
     Postelovo_body(R, meritko, body_X, body_Y)
+
+elif zobrazeni_input == "Pt":
+    Ptolemaiovo(R, meritko, M)
 
 print("\n-- program byl úspěšně dokončen --")
