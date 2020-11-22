@@ -112,6 +112,14 @@ def Ptolemaiovo(R, meritko, M):
             setpos(radians(30) - ((R*M/meritko/3)*(1/tan(radians(30))) + (R*M/meritko/3)*(radians(30-i))) * cos((radians(j)*sin(radians(30)))),
                    ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-i))) * sin(radians(j)*sin(radians(30))))
 
+def Ptolemainovo_body(body_X, body_Y):
+    """ Vykreslení bodů v Ptoilemaiově zobrazení. """
+
+    for p in range(len(body_X)):
+        penup()
+        setpos(body_X[p], body_Y[p])
+        pendown()
+        dot(10)
     exitonclick()
 
 # TODO: Uživatelské vstupy
@@ -120,7 +128,7 @@ while True:
     zobrazeni_input = str(input('Nabízená zobrazení: \n'
                                 ' Ma = Marinovo zobrazení (válcové)\n'  
                                 ' Po = Postelovo zobrazení (azimutální)\n'  
-                                ' Pt = Ptoilemanovo zobrazení \n' 
+                                ' Pt = Ptoilemanovo zobrazení (kuželové)\n' 
                                 '\nZadejte zkratku: '))
     if zobrazeni_input == "Ma" or zobrazeni_input == "Po" or zobrazeni_input == "Pt":
         break
@@ -177,6 +185,18 @@ while True:
         elif x == 0 and y == 0: # opuštění cyklu souřadnicí (0,0)
             print("--konec zadávání bodů --")
             break
+    elif zobrazeni_input == "Pt":
+        if x > 0 or y > 0:
+            souradnice_x = round(radians(30) - ((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3)*(radians(30-x))) * cos((radians(x)*sin(radians(30)))), 2)
+            souradnice_y = round(((R*M/meritko/3)*(1/tan(radians(30)))+(R*M/meritko/3) * (radians(30-y))) * sin((radians(y)*sin(radians(30)))), 2)
+            print(
+                "Přepočtené souřadnice: [", souradnice_x, ";", souradnice_y, "] \n")
+            # přiřazení do seznamu (vstup pro vykreslení)
+            body_X.append(souradnice_x)
+            body_Y.append(souradnice_y)
+        elif x == 0 and y == 0:  # opuštění cyklu souřadnicí (0,0)
+            print("--konec zadávání bodů --")
+            break
     else:
         break
 
@@ -187,9 +207,10 @@ if zobrazeni_input == "Ma":
 
 elif zobrazeni_input == "Po":
     Postelovo(M, R, meritko)
-    Postelovo_body(R, meritko, body_X, body_Y)
+    Postelovo_body(body_X, body_Y
 
 elif zobrazeni_input == "Pt":
     Ptolemaiovo(R, meritko, M)
+    Ptolemainovo_body(body_X, body_Y)
 
 print("\n-- program byl úspěšně dokončen --")
