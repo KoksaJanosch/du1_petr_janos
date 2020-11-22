@@ -118,7 +118,7 @@ while True:
 
 # * Zadání měřítka
 while True:
-    meritko = int(input("\nZadejte měřítko (pro výchozí 1: 120 000 000 zadejte nulu): \n"
+    meritko = int(input("\nZadejte měřítko (pro výchozí 1:120 000 000 zadejte nulu): \n"
                         "1 : "))
     if meritko < 0: # chybně zadané měřítko
         print("zadané měřítko je chybné, zkuste to znovu \n")
@@ -159,9 +159,11 @@ while True:
 
 # ! Volání funkcí:
 if zobrazeni_input == "Ma":
-    print(Marinovo(M, R, meritko))
-    print(Marinovo_body(body_X, body_Y))
+    Marinovo(M, R, meritko)
+    Marinovo_body(body_X, body_Y)
 
 elif zobrazeni_input == "Po":
-    print(Postelovo(M, R, meritko))
-    print(Postelovo_body(R, meritko, body_X, body_Y))
+    Postelovo(M, R, meritko)
+    Postelovo_body(R, meritko, body_X, body_Y)
+
+print("\n-- program byl úspěšně dokončen --")
